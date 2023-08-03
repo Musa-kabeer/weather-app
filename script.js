@@ -10,8 +10,7 @@ const apiKey = 'd5147bf297bfa19950482f4237339268';
 
 degree.textContent = '0ºC';
 
-// let lat, lng;
-// console.log(lat, lng);
+// FETCH WEATHER DETAILS FROM OPEN WEATHER API USING THE LATITUDE AND LONGITUDE PROVIDED BY updateDOMElements() FUNCTION
 async function fetchWeather(lat, lng) {
   const res = await fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}`
@@ -22,35 +21,30 @@ async function fetchWeather(lat, lng) {
   return data;
 }
 
+// FETCH FULL DETAILS ABOUT THE LOCATION (LAT & LNG)
 async function reverseGeocoding(lat, lng) {
   const res = await fetch(
     `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=5&appid=${apiKey}`
   );
 
-  const data = await res.json();
-
-  return data;
+  return await res.json();
 }
 
-const getCurrentLocation = () => {
-  navigator.geolocation.getCurrentPosition(
-    async (position) => {
-      const { latitude: lat, longitude: lng } = position.coords;
+// GET CURRENT LOCATION ON INITIAL RENDER
+navigator.geolocation.getCurrentPosition(
+  async (position) => {
+    const { latitude, longitude } = position.coords;
 
-      await updateDOMElements(lat, lng);
-    },
-    (err) => {
-      alert(err);
-    }
-  );
-};
+    await updateDOMElements(latitude, longitude);
+  },
+  (err) => {
+    alert(err);
+  }
+);
 
-getCurrentLocation();
-
-// https://geocoding-api.open-meteo.com/v1/search?name=${}
 async function searchInputWeather(query) {
   const res = await fetch(
-    ` https://geocoding-api.open-meteo.com/v1/search?name=${query}`
+    `https://geocoding-api.open-meteo.com/v1/search?name=${query}`
   );
 
   return res.json();
@@ -65,9 +59,9 @@ form.addEventListener('submit', async (e) => {
   if (Object.keys(data).length === 1)
     return alert("Can't find the Country. Do try another one");
 
-  const { latitude: lat, longitude: lng } = data.results[0];
+  const { latitude, longitude } = data.results[0];
 
-  await updateDOMElements(lat, lng);
+  await updateDOMElements(latitude, longitude);
 });
 
 async function updateDOMElements(lat, lng) {
