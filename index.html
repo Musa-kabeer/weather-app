@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="index.css" />
+    <script defer src="script.js"></script>
+    <title>Weather(JS)</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>JS Weather</h1>
+
+      <form>
+        <input
+          type="text"
+          class="query"
+          placeholder=" Find the temperature of countries, states ,towns and cities
+        you know...."
+        />
+        <button>Search</button>
+      </form>
+
+      <div class="degrees">
+        <h2 class="degree"></h2>
+        <p class="town">Loading....</p>
+      </div>
+
+      <div class="text">
+        <i id="cloud" class="fas fa-cloud"></i>
+        <span>Clouds</span>
+      </div>
+
+      <div class="types">
+        <div class="type">
+          <i class="fa-solid fa-bong"></i>
+          <p class="humidity">Loading...</p>
+          <p>Humidity</p>
+        </div>
+        <div class="type">
+          <i class="fa-solid fa-bong"></i>
+          <p class="wind">Loading...</p>
+          <p>Wind</p>
+        </div>
+
+        <div class="type">
+          <i class="fa-solid fa-bong"></i>
+          <p class="pressure">Loading...</p>
+          <p>Air pressure</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
