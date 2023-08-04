@@ -5,6 +5,7 @@ const humidity = document.querySelector('.humidity');
 const wind = document.querySelector('.wind');
 const pressure = document.querySelector('.pressure');
 const form = document.querySelector('form');
+const cloud = document.querySelector('.cloud');
 
 const apiKey = 'd5147bf297bfa19950482f4237339268';
 
@@ -19,15 +20,6 @@ async function fetchWeather(lat, lng) {
   const data = await res.json();
 
   return data;
-}
-
-// FETCH FULL DETAILS ABOUT THE LOCATION (LAT & LNG)
-async function reverseGeocoding(lat, lng) {
-  const res = await fetch(
-    `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=5&appid=${apiKey}`
-  );
-
-  return await res.json();
 }
 
 // GET CURRENT LOCATION ON INITIAL RENDER
@@ -67,13 +59,11 @@ form.addEventListener('submit', async (e) => {
 async function updateDOMElements(lat, lng) {
   const weather = await fetchWeather(lat, lng);
 
-  const reverse = await reverseGeocoding(lat, lng);
-
   degree.textContent = `${Math.round(weather.main.temp - 273)}ºC`;
 
-  town.textContent = `${reverse[0].name} ${
-    reverse[0].state ? reverse[0].state : ''
-  }, ${reverse[0].country}`;
+  cloud.textContent = `${weather.weather[0].description}`;
+
+  town.textContent = `${weather.name} ${weather.sys.country}`;
 
   humidity.textContent = `${weather.main.humidity}%`;
   wind.textContent = `${weather.wind.deg}mps`;
