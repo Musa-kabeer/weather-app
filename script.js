@@ -63,7 +63,7 @@ async function updateDOMElements(lat, lng) {
 
   cloud.textContent = `${weather.weather[0].description}`;
 
-  town.textContent = `${weather.name} ${weather.sys.country}`;
+  town.textContent = `${weather.name} ,${weather.sys.country}`;
 
   humidity.textContent = `${weather.main.humidity}%`;
   wind.textContent = `${weather.wind.deg}mps`;
